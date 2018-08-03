@@ -62,7 +62,7 @@ setup(name="hfof", version=find_version("hfof/version.py"),
       package_data = {
         'hfof': ['tests/*.dat']
       },
-      license='GPL3',
+      license='MIT',
       install_requires=['numpy', 'cython'],
       ext_modules = cythonize(extensions),
       cmdclass={'build_ext' : build_ext}
