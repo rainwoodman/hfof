@@ -24,17 +24,17 @@ class build_ext(build_ext_base):
 
     def get_ext_filename(self, ext_name):
         # remove the python 3 prefixes which we cannot determine
-        # at runtime.
+        # at runtime, and also remove python2 ext name prefixes
         if self._ctypes:
-            return ext_name + '.so'
+            return ext_name.split('.')[-1] + '.so'
         return build_ext_base.get_ext_filename(self, ext_name)
 
 extensions = [
         CTypes("hfof.libhfof", [
             "src/fof.c",  "src/fof64.c", "src/testing.c", "src/periodic.c"],
             include_dirs=["src/", numpy.get_include()],
-            extra_compile_args=['-O3', '-g'],
-            extra_link_args=['-O3', '-g'],
+            extra_compile_args=['-O2', '-g', '-std=c99'],
+            extra_link_args=['-O2', '-g', '-std=c99'],
             libraries = ['m'],
             )
         ]
